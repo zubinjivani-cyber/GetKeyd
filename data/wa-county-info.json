@@ -1,0 +1,316 @@
+{
+  "001": {
+    "name": "Adams County",
+    "assessorUrl": "https://www.co.adams.wa.us/departments/assessor",
+    "hasApi": false,
+    "medianHomeValue": 280000,
+    "population": 20800,
+    "propertyTaxRate": 0.0104
+  },
+  "003": {
+    "name": "Asotin County",
+    "assessorUrl": "https://www.co.asotin.wa.us/assessor",
+    "hasApi": false,
+    "medianHomeValue": 310000,
+    "population": 22400,
+    "propertyTaxRate": 0.0116
+  },
+  "005": {
+    "name": "Benton County",
+    "assessorUrl": "https://www.co.benton.wa.us/government/assessor",
+    "hasApi": false,
+    "medianHomeValue": 425000,
+    "population": 207000,
+    "propertyTaxRate": 0.0101
+  },
+  "007": {
+    "name": "Chelan County",
+    "assessorUrl": "https://www.co.chelan.wa.us/assessor",
+    "hasApi": false,
+    "medianHomeValue": 520000,
+    "population": 79800,
+    "propertyTaxRate": 0.0094
+  },
+  "009": {
+    "name": "Clallam County",
+    "assessorUrl": "https://www.clallamcountywa.gov/178/Assessor",
+    "hasApi": false,
+    "medianHomeValue": 470000,
+    "population": 77200,
+    "propertyTaxRate": 0.0086
+  },
+  "011": {
+    "name": "Clark County",
+    "assessorUrl": "https://clark.wa.gov/assessor",
+    "hasApi": false,
+    "medianHomeValue": 520000,
+    "population": 503000,
+    "propertyTaxRate": 0.0102
+  },
+  "013": {
+    "name": "Columbia County",
+    "assessorUrl": "https://www.columbiaco.com/departments/assessor",
+    "hasApi": false,
+    "medianHomeValue": 240000,
+    "population": 4000,
+    "propertyTaxRate": 0.0086
+  },
+  "015": {
+    "name": "Cowlitz County",
+    "assessorUrl": "https://www.co.cowlitz.wa.us/assessor",
+    "hasApi": false,
+    "medianHomeValue": 390000,
+    "population": 111000,
+    "propertyTaxRate": 0.0095
+  },
+  "017": {
+    "name": "Douglas County",
+    "assessorUrl": "https://www.douglascountywa.net/departments/assessor",
+    "hasApi": false,
+    "medianHomeValue": 430000,
+    "population": 43800,
+    "propertyTaxRate": 0.0093
+  },
+  "019": {
+    "name": "Ferry County",
+    "assessorUrl": "https://www.ferry-county.com/assessor",
+    "hasApi": false,
+    "medianHomeValue": 250000,
+    "population": 7200,
+    "propertyTaxRate": 0.0073
+  },
+  "021": {
+    "name": "Franklin County",
+    "assessorUrl": "https://www.co.franklin.wa.us/assessor",
+    "hasApi": false,
+    "medianHomeValue": 390000,
+    "population": 96800,
+    "propertyTaxRate": 0.0107
+  },
+  "023": {
+    "name": "Garfield County",
+    "assessorUrl": "https://www.co.garfield.wa.us/departments/assessor",
+    "hasApi": false,
+    "medianHomeValue": 230000,
+    "population": 2300,
+    "propertyTaxRate": 0.0089
+  },
+  "025": {
+    "name": "Grant County",
+    "assessorUrl": "https://www.grantcountywa.gov/176/Assessor",
+    "hasApi": false,
+    "medianHomeValue": 350000,
+    "population": 101000,
+    "propertyTaxRate": 0.0092
+  },
+  "027": {
+    "name": "Grays Harbor County",
+    "assessorUrl": "https://www.graysharbor.us/departments/assessor",
+    "hasApi": false,
+    "medianHomeValue": 330000,
+    "population": 75200,
+    "propertyTaxRate": 0.0091
+  },
+  "029": {
+    "name": "Island County",
+    "assessorUrl": "https://www.islandcountywa.gov/176/Assessor",
+    "hasApi": false,
+    "medianHomeValue": 580000,
+    "population": 86600,
+    "propertyTaxRate": 0.0087
+  },
+  "031": {
+    "name": "Jefferson County",
+    "assessorUrl": "https://www.co.jefferson.wa.us/122/Assessor",
+    "hasApi": false,
+    "medianHomeValue": 550000,
+    "population": 33400,
+    "propertyTaxRate": 0.0084
+  },
+  "033": {
+    "name": "King County",
+    "assessorUrl": "https://blue.kingcounty.com/Assessor/eRealProperty",
+    "parcelApi": "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_PropertyInfo/MapServer/2/query",
+    "salesApi": "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_PropertyInfo/MapServer/3/query",
+    "hasApi": true,
+    "medianHomeValue": 850000,
+    "population": 2269675,
+    "propertyTaxRate": 0.0093
+  },
+  "035": {
+    "name": "Kitsap County",
+    "assessorUrl": "https://www.kitsapgov.com/assessor/Pages/default.aspx",
+    "hasApi": false,
+    "medianHomeValue": 550000,
+    "population": 276000,
+    "propertyTaxRate": 0.0101
+  },
+  "037": {
+    "name": "Kittitas County",
+    "assessorUrl": "https://www.co.kittitas.wa.us/assessor",
+    "hasApi": false,
+    "medianHomeValue": 510000,
+    "population": 44200,
+    "propertyTaxRate": 0.0097
+  },
+  "039": {
+    "name": "Klickitat County",
+    "assessorUrl": "https://www.klickitatcounty.org/218/Assessor",
+    "hasApi": false,
+    "medianHomeValue": 430000,
+    "population": 22800,
+    "propertyTaxRate": 0.0083
+  },
+  "041": {
+    "name": "Lewis County",
+    "assessorUrl": "https://lewiscountywa.gov/departments/assessor",
+    "hasApi": false,
+    "medianHomeValue": 400000,
+    "population": 83200,
+    "propertyTaxRate": 0.0093
+  },
+  "043": {
+    "name": "Lincoln County",
+    "assessorUrl": "https://www.co.lincoln.wa.us/assessor",
+    "hasApi": false,
+    "medianHomeValue": 290000,
+    "population": 11000,
+    "propertyTaxRate": 0.0087
+  },
+  "045": {
+    "name": "Mason County",
+    "assessorUrl": "https://www.masoncountywa.gov/assessor",
+    "hasApi": false,
+    "medianHomeValue": 420000,
+    "population": 66800,
+    "propertyTaxRate": 0.0089
+  },
+  "047": {
+    "name": "Okanogan County",
+    "assessorUrl": "https://www.okanogancounty.org/government/assessor",
+    "hasApi": false,
+    "medianHomeValue": 320000,
+    "population": 42800,
+    "propertyTaxRate": 0.0078
+  },
+  "049": {
+    "name": "Pacific County",
+    "assessorUrl": "https://www.co.pacific.wa.us/assessor",
+    "hasApi": false,
+    "medianHomeValue": 350000,
+    "population": 23400,
+    "propertyTaxRate": 0.0082
+  },
+  "051": {
+    "name": "Pend Oreille County",
+    "assessorUrl": "https://pendoreilleco.org/departments/assessor",
+    "hasApi": false,
+    "medianHomeValue": 340000,
+    "population": 13600,
+    "propertyTaxRate": 0.0075
+  },
+  "053": {
+    "name": "Pierce County",
+    "assessorUrl": "https://www.co.pierce.wa.us/91/Assessor---Treasurer",
+    "hasApi": false,
+    "medianHomeValue": 550000,
+    "population": 921130,
+    "propertyTaxRate": 0.0105
+  },
+  "055": {
+    "name": "San Juan County",
+    "assessorUrl": "https://www.sanjuanco.com/168/Assessor",
+    "hasApi": false,
+    "medianHomeValue": 800000,
+    "population": 18000,
+    "propertyTaxRate": 0.0058
+  },
+  "057": {
+    "name": "Skagit County",
+    "assessorUrl": "https://www.skagitcounty.net/Departments/Assessor",
+    "hasApi": false,
+    "medianHomeValue": 530000,
+    "population": 131000,
+    "propertyTaxRate": 0.0096
+  },
+  "059": {
+    "name": "Skamania County",
+    "assessorUrl": "https://www.skamaniacounty.org/departments/assessor",
+    "hasApi": false,
+    "medianHomeValue": 480000,
+    "population": 12000,
+    "propertyTaxRate": 0.0082
+  },
+  "061": {
+    "name": "Snohomish County",
+    "assessorUrl": "https://snohomishcountywa.gov/266/Assessor",
+    "hasApi": false,
+    "medianHomeValue": 720000,
+    "population": 828000,
+    "propertyTaxRate": 0.0096
+  },
+  "063": {
+    "name": "Spokane County",
+    "assessorUrl": "https://www.spokanecounty.org/224/Assessor",
+    "hasApi": false,
+    "medianHomeValue": 425000,
+    "population": 539000,
+    "propertyTaxRate": 0.0108
+  },
+  "065": {
+    "name": "Stevens County",
+    "assessorUrl": "https://www.stevenscountywa.gov/departments/assessor",
+    "hasApi": false,
+    "medianHomeValue": 370000,
+    "population": 46300,
+    "propertyTaxRate": 0.0084
+  },
+  "067": {
+    "name": "Thurston County",
+    "assessorUrl": "https://www.thurstoncountywa.gov/asr/Pages/assessor.aspx",
+    "hasApi": false,
+    "medianHomeValue": 510000,
+    "population": 295000,
+    "propertyTaxRate": 0.0104
+  },
+  "069": {
+    "name": "Wahkiakum County",
+    "assessorUrl": "https://www.co.wahkiakum.wa.us/departments/assessor",
+    "hasApi": false,
+    "medianHomeValue": 310000,
+    "population": 4400,
+    "propertyTaxRate": 0.0076
+  },
+  "071": {
+    "name": "Walla Walla County",
+    "assessorUrl": "https://www.co.walla-walla.wa.us/government/assessor",
+    "hasApi": false,
+    "medianHomeValue": 380000,
+    "population": 62400,
+    "propertyTaxRate": 0.0103
+  },
+  "073": {
+    "name": "Whatcom County",
+    "assessorUrl": "https://www.whatcomcounty.us/384/Assessor",
+    "hasApi": false,
+    "medianHomeValue": 600000,
+    "population": 229000,
+    "propertyTaxRate": 0.0092
+  },
+  "075": {
+    "name": "Whitman County",
+    "assessorUrl": "https://www.whitmancounty.org/173/Assessor",
+    "hasApi": false,
+    "medianHomeValue": 340000,
+    "population": 47800,
+    "propertyTaxRate": 0.0111
+  },
+  "077": {
+    "name": "Yakima County",
+    "assessorUrl": "https://www.yakimacounty.us/351/Assessor",
+    "hasApi": false,
+    "medianHomeValue": 360000,
+    "population": 257000,
+    "propertyTaxRate": 0.0095
+  }
+}

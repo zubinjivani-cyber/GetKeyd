@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../js/gate.js"></script>
+  <title>Learn - getkeyd</title>
+
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://www.gstatic.com https://unpkg.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    img-src 'self' data: https:;
+    connect-src 'self' https://data.wa.gov https://geocoding.geo.census.gov https://api.census.gov https://nominatim.openstreetmap.org https://photon.komoot.io https://overpass-api.de https://api.weather.gov https://hazards.fema.gov https://gismaps.kingcounty.gov https://formspree.io https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com http://localhost:3001;
+    frame-src https://www.youtube-nocookie.com https://accounts.google.com;
+    media-src 'self';
+    base-uri 'self';
+    form-action 'self' https://formspree.io;
+    object-src 'none';
+  " />
+  <meta name="description" content="A plain-language glossary and FAQ answering the terms and questions that trip first-time home buyers up." />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css?v=5" />
+  <link rel="canonical" href="https://getkeyd.app/pages/learn.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="getkeyd" />
+  <meta property="og:title" content="Learn - getkeyd" />
+  <meta property="og:description" content="A plain-language glossary and FAQ answering the terms and questions that trip first-time home buyers up." />
+  <meta property="og:url" content="https://getkeyd.app/pages/learn.html" />
+  <meta property="og:image" content="https://getkeyd.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Learn - getkeyd" />
+  <meta name="twitter:description" content="A plain-language glossary and FAQ answering the terms and questions that trip first-time home buyers up." />
+  <meta name="twitter:image" content="https://getkeyd.app/assets/og-image.png" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="wrap" id="main">
+    <section class="section">
+      <h1>Learn the Basics</h1>
+      <p class="sub">Plain-language answers to the terms and questions that trip first-time buyers up.</p>
+
+      <h3 class="tool-title">📚 Guides</h3>
+      <p class="sub">Short, jargon-free reads that explain how home-buying really works. Start anywhere.</p>
+      <div id="guides-progress" class="gloss-progress"></div>
+      <div id="guides-list" class="guides"></div>
+
+      <h3 class="tool-title" style="margin-top:52px;">📖 Glossary</h3>
+      <div id="glossary-progress" class="gloss-progress"></div>
+      <input type="search" id="glossary-search" class="search" placeholder="Search terms… e.g. escrow, PMI, earnest money" aria-label="Search glossary terms" />
+      <div id="glossary-cats" class="gloss-cats"></div>
+      <div id="glossary-list" class="glossary"></div>
+
+      <h3 class="tool-title" style="margin-top:52px;">❓ Frequently Asked Questions</h3>
+      <div id="faq-list" class="faq"></div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="../js/helpers.js"></script>
+  <script src="../js/layout.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script type="module" src="../js/auth.js"></script>
+</body>
+</html>

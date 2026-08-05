@@ -1,0 +1,217 @@
+{
+  "seattle": {
+    "district": "Seattle Public Schools",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=103&OrgType=4",
+    "rating": 7
+  },
+  "bellevue": {
+    "district": "Bellevue School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=197&OrgType=4",
+    "rating": 9
+  },
+  "redmond": {
+    "district": "Lake Washington School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=398&OrgType=4",
+    "rating": 9
+  },
+  "kirkland": {
+    "district": "Lake Washington School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=398&OrgType=4",
+    "rating": 9
+  },
+  "tacoma": {
+    "district": "Tacoma Public Schools",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=2383&OrgType=4",
+    "rating": 5
+  },
+  "spokane": {
+    "district": "Spokane Public Schools",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=2244&OrgType=4",
+    "rating": 5
+  },
+  "vancouver": {
+    "district": "Vancouver Public Schools",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=2611&OrgType=4",
+    "rating": 5
+  },
+  "olympia": {
+    "district": "Olympia School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1364&OrgType=4",
+    "rating": 7
+  },
+  "everett": {
+    "district": "Everett Public Schools",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=776&OrgType=4",
+    "rating": 6
+  },
+  "renton": {
+    "district": "Renton School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1601&OrgType=4",
+    "rating": 4
+  },
+  "kent": {
+    "district": "Kent School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1098&OrgType=4",
+    "rating": 4
+  },
+  "bellingham": {
+    "district": "Bellingham Public Schools",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=168&OrgType=4",
+    "rating": 7
+  },
+  "yakima": {
+    "district": "Yakima School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=2767&OrgType=4",
+    "rating": 3
+  },
+  "richland": {
+    "district": "Richland School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1626&OrgType=4",
+    "rating": 7
+  },
+  "auburn": {
+    "district": "Auburn School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=92&OrgType=4",
+    "rating": 4
+  },
+  "federal way": {
+    "district": "Federal Way Public Schools",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=815&OrgType=4",
+    "rating": 4
+  },
+  "kennewick": {
+    "district": "Kennewick School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1106&OrgType=4",
+    "rating": 5
+  },
+  "pasco": {
+    "district": "Pasco School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1418&OrgType=4",
+    "rating": 3
+  },
+  "marysville": {
+    "district": "Marysville School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1232&OrgType=4",
+    "rating": 4
+  },
+  "lakewood": {
+    "district": "Clover Park School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=503&OrgType=4",
+    "rating": 3
+  },
+  "sammamish": {
+    "district": "Issaquah School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=946&OrgType=4",
+    "rating": 9
+  },
+  "shoreline": {
+    "district": "Shoreline School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=2159&OrgType=4",
+    "rating": 8
+  },
+  "issaquah": {
+    "district": "Issaquah School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=946&OrgType=4",
+    "rating": 9
+  },
+  "lynnwood": {
+    "district": "Edmonds School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=706&OrgType=4",
+    "rating": 6
+  },
+  "burien": {
+    "district": "Highline Public Schools",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=908&OrgType=4",
+    "rating": 4
+  },
+  "bothell": {
+    "district": "Northshore School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1319&OrgType=4",
+    "rating": 9
+  },
+  "edmonds": {
+    "district": "Edmonds School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=706&OrgType=4",
+    "rating": 6
+  },
+  "pullman": {
+    "district": "Pullman School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1541&OrgType=4",
+    "rating": 8
+  },
+  "walla walla": {
+    "district": "Walla Walla Public Schools",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=2636&OrgType=4",
+    "rating": 5
+  },
+  "wenatchee": {
+    "district": "Wenatchee School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=2692&OrgType=4",
+    "rating": 5
+  },
+  "longview": {
+    "district": "Longview Public Schools",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1181&OrgType=4",
+    "rating": 3
+  },
+  "bremerton": {
+    "district": "Bremerton School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=235&OrgType=4",
+    "rating": 4
+  },
+  "puyallup": {
+    "district": "Puyallup School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1548&OrgType=4",
+    "rating": 6
+  },
+  "port angeles": {
+    "district": "Port Angeles School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1482&OrgType=4",
+    "rating": 5
+  },
+  "mount vernon": {
+    "district": "Mount Vernon School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1301&OrgType=4",
+    "rating": 4
+  },
+  "oak harbor": {
+    "district": "Oak Harbor School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1334&OrgType=4",
+    "rating": 6
+  },
+  "camas": {
+    "district": "Camas School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=332&OrgType=4",
+    "rating": 9
+  },
+  "mercer island": {
+    "district": "Mercer Island School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1261&OrgType=4",
+    "rating": 10
+  },
+  "moses lake": {
+    "district": "Moses Lake School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1288&OrgType=4",
+    "rating": 4
+  },
+  "battle ground": {
+    "district": "Battle Ground Public Schools",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=130&OrgType=4",
+    "rating": 6
+  },
+  "cheney": {
+    "district": "Cheney School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=447&OrgType=4",
+    "rating": 5
+  },
+  "ellensburg": {
+    "district": "Ellensburg School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=731&OrgType=4",
+    "rating": 6
+  },
+  "aberdeen": {
+    "district": "Aberdeen School District",
+    "ospiUrl": "https://reportcard.ospi.k12.wa.us/Summary.aspx?schoolId=1&OrgType=4",
+    "rating": 3
+  }
+}

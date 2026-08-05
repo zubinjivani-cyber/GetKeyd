@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../js/gate.js"></script>
+  <title>Journey - getkeyd</title>
+
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://www.gstatic.com https://unpkg.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    img-src 'self' data: https:;
+    connect-src 'self' https://data.wa.gov https://geocoding.geo.census.gov https://api.census.gov https://nominatim.openstreetmap.org https://photon.komoot.io https://overpass-api.de https://api.weather.gov https://hazards.fema.gov https://gismaps.kingcounty.gov https://formspree.io https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com http://localhost:3001;
+    frame-src https://www.youtube-nocookie.com https://accounts.google.com;
+    media-src 'self';
+    base-uri 'self';
+    form-action 'self' https://formspree.io;
+    object-src 'none';
+  " />
+  <meta name="description" content="A step-by-step guided home-buying journey, from financial prep through closing, with saved progress." />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css?v=5" />
+  <link rel="canonical" href="https://getkeyd.app/pages/journey.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="getkeyd" />
+  <meta property="og:title" content="Journey - getkeyd" />
+  <meta property="og:description" content="A step-by-step guided home-buying journey, from financial prep through closing, with saved progress." />
+  <meta property="og:url" content="https://getkeyd.app/pages/journey.html" />
+  <meta property="og:image" content="https://getkeyd.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Journey - getkeyd" />
+  <meta name="twitter:description" content="A step-by-step guided home-buying journey, from financial prep through closing, with saved progress." />
+  <meta name="twitter:image" content="https://getkeyd.app/assets/og-image.png" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="wrap" id="main">
+    <section class="section journey-section">
+      <h1>Your Guided Journey</h1>
+      <p class="sub">Every step to buying a home in Washington, with WA-specific notes. Check off steps as you go - your progress is saved automatically.</p>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+        <span id="progress-label" class="progress-label">0% complete</span>
+        <button id="reset-progress" class="btn-link" type="button">Reset</button>
+      </div>
+      <div id="journey-celebrate" class="celebrate hidden">
+        🎉 You've completed every step. Congratulations - you're a homeowner!
+      </div>
+      <div id="journey-list" class="journey"></div>
+    </section>
+
+    <section class="section doc-section">
+      <div class="checklist-head">
+        <div>
+          <h2>Document Checklist</h2>
+          <p class="sub" style="margin-bottom:0">You'll need this paperwork for <strong>Phase 2 — Pre-Approval</strong>. Lenders ask for the same core documents, so gather everything up front and pre-approval goes far more smoothly. Print it (or save as a PDF) to check off as you go.</p>
+        </div>
+        <button class="btn ghost print-btn" id="print-btn" type="button">🖨️ Print / Save PDF</button>
+      </div>
+
+      <div class="doc-grid">
+        <article class="doc-card">
+          <h3>💼 Income &amp; Employment</h3>
+          <ul>
+            <li><span class="d-name">Last 2 years of W-2s</span><span class="d-desc">From every employer.</span></li>
+            <li><span class="d-name">Recent pay stubs</span><span class="d-desc">Covering the last 30 days.</span></li>
+            <li><span class="d-name">Last 2 years of tax returns</span><span class="d-desc">All pages and schedules.</span></li>
+            <li><span class="d-name">Proof of other income</span><span class="d-desc">Bonuses, alimony, Social Security - if applicable.</span></li>
+          </ul>
+        </article>
+
+        <article class="doc-card">
+          <h3>🏦 Assets &amp; Savings</h3>
+          <ul>
+            <li><span class="d-name">2 months of bank statements</span><span class="d-desc">All pages, even blank ones.</span></li>
+            <li><span class="d-name">Retirement &amp; investment statements</span><span class="d-desc">401(k), IRA, brokerage accounts.</span></li>
+            <li><span class="d-name">Down payment source</span><span class="d-desc">Show where the funds came from.</span></li>
+            <li><span class="d-name">Gift letter</span><span class="d-desc">If any down-payment money is a gift.</span></li>
+          </ul>
+        </article>
+
+        <article class="doc-card">
+          <h3>🪪 Identity</h3>
+          <ul>
+            <li><span class="d-name">Government photo ID</span><span class="d-desc">Driver's license or passport.</span></li>
+            <li><span class="d-name">Social Security number</span><span class="d-desc">For your credit check.</span></li>
+            <li><span class="d-name">2-year address history</span><span class="d-desc">Where you've lived and rented.</span></li>
+          </ul>
+        </article>
+
+        <article class="doc-card">
+          <h3>💳 Debts &amp; Obligations</h3>
+          <ul>
+            <li><span class="d-name">List of monthly debts</span><span class="d-desc">Car, credit cards, personal loans.</span></li>
+            <li><span class="d-name">Student loan statements</span><span class="d-desc">Current balance and monthly payment.</span></li>
+            <li><span class="d-name">Child support / alimony docs</span><span class="d-desc">If applicable.</span></li>
+          </ul>
+        </article>
+
+        <article class="doc-card">
+          <h3>🧾 If Self-Employed</h3>
+          <ul>
+            <li><span class="d-name">2 years of business tax returns</span><span class="d-desc">Including all schedules.</span></li>
+            <li><span class="d-name">Year-to-date profit &amp; loss</span><span class="d-desc">Signed and dated.</span></li>
+            <li><span class="d-name">Business license or formation docs</span><span class="d-desc">Proof the business exists.</span></li>
+          </ul>
+        </article>
+
+        <article class="doc-card tip-card">
+          <h3>💡 Good to Know</h3>
+          <ul>
+            <li><span class="d-name">Keep digital copies</span><span class="d-desc">Scan or photograph everything into one folder.</span></li>
+            <li><span class="d-name">Don't make big money moves</span><span class="d-desc">Avoid large deposits or new debt while applying.</span></li>
+            <li><span class="d-name">Ask your lender early</span><span class="d-desc">Requirements vary slightly by loan type.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="../js/helpers.js"></script>
+  <script src="../js/layout.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script type="module" src="../js/auth.js"></script>
+  <script src="../js/tour-journey.js"></script>
+</body>
+</html>

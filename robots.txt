@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /auth-action.html
+Sitemap: https://getkeyd.app/sitemap.xml

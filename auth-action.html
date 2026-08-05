@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirming… — getkeyd</title>
+
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://www.gstatic.com https://unpkg.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    img-src 'self' data: https:;
+    connect-src 'self' https://data.wa.gov https://geocoding.geo.census.gov https://api.census.gov https://nominatim.openstreetmap.org https://photon.komoot.io https://overpass-api.de https://api.weather.gov https://hazards.fema.gov https://gismaps.kingcounty.gov https://formspree.io https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com http://localhost:3001;
+    frame-src https://www.youtube-nocookie.com https://accounts.google.com;
+    media-src 'self';
+    base-uri 'self';
+    form-action 'self' https://formspree.io;
+    object-src 'none';
+  " />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=5" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="wrap" id="main">
+    <section class="section center-page">
+      <div class="panel auth-card">
+        <div class="auth-logo" id="aa-icon">⏳</div>
+        <h1 id="aa-title">One moment…</h1>
+        <p class="sub" id="aa-msg">Confirming your request.</p>
+        <div id="aa-error" class="auth-error hidden" role="alert"></div>
+        <div id="aa-form"></div>
+        <div id="aa-actions"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/layout.js"></script>
+  <script type="module" src="js/auth-action.js"></script>
+</body>
+</html>

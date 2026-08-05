@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../js/gate.js"></script>
+  <title>Contact - getkeyd</title>
+
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://www.gstatic.com https://unpkg.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    img-src 'self' data: https:;
+    connect-src 'self' https://data.wa.gov https://geocoding.geo.census.gov https://api.census.gov https://nominatim.openstreetmap.org https://photon.komoot.io https://overpass-api.de https://api.weather.gov https://hazards.fema.gov https://gismaps.kingcounty.gov https://formspree.io https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com http://localhost:3001;
+    frame-src https://www.youtube-nocookie.com https://accounts.google.com;
+    media-src 'self';
+    base-uri 'self';
+    form-action 'self' https://formspree.io;
+    object-src 'none';
+  " />
+  <meta name="description" content="Get in touch with the getkeyd team - questions, feedback, or lender and agent partnerships." />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css?v=5" />
+  <link rel="canonical" href="https://getkeyd.app/pages/contact.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="getkeyd" />
+  <meta property="og:title" content="Contact - getkeyd" />
+  <meta property="og:description" content="Get in touch with the getkeyd team - questions, feedback, or lender and agent partnerships." />
+  <meta property="og:url" content="https://getkeyd.app/pages/contact.html" />
+  <meta property="og:image" content="https://getkeyd.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact - getkeyd" />
+  <meta name="twitter:description" content="Get in touch with the getkeyd team - questions, feedback, or lender and agent partnerships." />
+  <meta name="twitter:image" content="https://getkeyd.app/assets/og-image.png" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="wrap" id="main">
+    <section class="section center-page">
+      <h1>Get in Touch</h1>
+      <p class="sub">Questions, feedback, or want to partner with us as a lender or agent? Send a note - we read every message.</p>
+      <form id="contact-form" class="panel narrow" action="https://formspree.io/f/mbdvnqgb" method="POST">
+        <label>
+          Name
+          <input type="text" name="name" placeholder="Your name" required autocomplete="name" />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@email.com" required autocomplete="email" />
+        </label>
+        <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <label>
+          Subject
+          <select name="subject" required>
+            <option value="">Select…</option>
+            <option>General question</option>
+            <option>Feedback on the app</option>
+            <option>Lender / agent partnership</option>
+            <option>Press or media</option>
+          </select>
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="5" placeholder="How can we help?" required></textarea>
+        </label>
+        <button type="submit" class="btn primary">Send message</button>
+      </form>
+      <div id="contact-result" class="result hidden" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="../js/helpers.js"></script>
+  <script src="../js/layout.js"></script>
+  <script src="../js/app.js"></script>
+  <script type="module" src="../js/auth.js"></script>
+</body>
+</html>

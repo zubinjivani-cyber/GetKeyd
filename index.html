@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>getkeyd — Washington homebuying, made simple</title>
+
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://www.gstatic.com https://unpkg.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    img-src 'self' data: https:;
+    connect-src 'self' https://data.wa.gov https://geocoding.geo.census.gov https://api.census.gov https://nominatim.openstreetmap.org https://photon.komoot.io https://overpass-api.de https://api.weather.gov https://hazards.fema.gov https://gismaps.kingcounty.gov https://formspree.io https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com http://localhost:3001;
+    frame-src https://www.youtube-nocookie.com https://accounts.google.com;
+    media-src 'self';
+    base-uri 'self';
+    form-action 'self' https://formspree.io;
+    object-src 'none';
+  " />
+  <meta name="description" content="getkeyd is your friendly guide to buying your first home in Washington State, from 'can I afford this?' all the way to the keys — with WSHFC assistance programs and WA-specific guidance." />
+  <script src="js/gate.js"></script>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=5" />
+  <link rel="canonical" href="https://getkeyd.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="getkeyd" />
+  <meta property="og:title" content="getkeyd — Washington homebuying, made simple" />
+  <meta property="og:description" content="getkeyd is your friendly guide to buying your first home in Washington State, from 'can I afford this?' all the way to the keys — with WSHFC assistance programs and WA-specific guidance." />
+  <meta property="og:url" content="https://getkeyd.app/" />
+  <meta property="og:image" content="https://getkeyd.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="getkeyd — Washington homebuying, made simple" />
+  <meta name="twitter:description" content="getkeyd is your friendly guide to buying your first home in Washington State, from 'can I afford this?' all the way to the keys — with WSHFC assistance programs and WA-specific guidance." />
+  <meta name="twitter:image" content="https://getkeyd.app/assets/og-image.png" />
+</head>
+<body>
+  <div class="intro" id="intro" tabindex="0" aria-label="Skip intro animation">
+    <div class="intro-inner">
+      <svg class="intro-logo" viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="intro-ring" cx="60" cy="60" r="50" fill="none" stroke="#7ba591" stroke-width="2"/>
+        <path class="intro-house" d="M60 22 L94 52 V90 Q94 94 90 94 H30 Q26 94 26 90 V52 Z"/>
+        <g class="intro-key" fill="#faf6f0">
+          <circle cx="60" cy="60" r="10"/>
+          <path d="M54 67 h12 l-3 17 h-6 Z"/>
+        </g>
+      </svg>
+      <div class="intro-word">
+        <span style="animation-delay:1.30s">g</span><span style="animation-delay:1.36s">e</span><span style="animation-delay:1.42s">t</span><span style="animation-delay:1.48s">k</span><span style="animation-delay:1.54s">e</span><span style="animation-delay:1.60s">y</span><span style="animation-delay:1.66s">d</span>
+      </div>
+      <p class="intro-tag">your key to homeownership</p>
+    </div>
+    <p class="intro-skip">click or press Enter to skip</p>
+  </div>
+
+  <header id="site-header"></header>
+
+  <main class="wrap" id="main">
+
+    <!-- GUEST VIEW (logged out) -->
+    <section class="section guest-view">
+      <div class="hero">
+        <p class="hero-hi">🌲 Made for first-time buyers in Washington</p>
+        <h1>Your first home in Washington is closer <span class="hl">than you think</span>. 🏡</h1>
+        <p class="lede">
+          We're your friendly guide from "can I even afford this?" all the way to the keys in your hand —
+          with Washington-specific steps, WSHFC assistance programs, and local rules explained in plain English.
+          Free, simple, and made just for first-time buyers. No jargon, no pressure.
+        </p>
+        <div class="cta-row">
+          <a href="login.html" class="btn primary">Get started free</a>
+          <a href="pages/plan.html" class="btn ghost">Explore the tools</a>
+        </div>
+      </div>
+
+      <div class="cards">
+        <a class="card" href="pages/plan.html">
+          <div class="card-ico">🧮</div>
+          <h2>Plan</h2>
+          <p>See what you can afford, estimate your monthly payment, and track your down-payment savings goal, all in one place.</p>
+        </a>
+        <a class="card" href="pages/journey.html">
+          <div class="card-ico">🗺️</div>
+          <h2>Journey</h2>
+          <p>Every step from prep to closing, with Washington notes, saved progress, and a printable document checklist for pre-approval.</p>
+        </a>
+        <a class="card" href="pages/learn.html">
+          <div class="card-ico">📖</div>
+          <h2>Learn</h2>
+          <p>Plain-language guides, a searchable glossary, and answers to the questions that trip first-time buyers up.</p>
+        </a>
+        <a class="card" href="pages/resources.html">
+          <div class="card-ico">🧭</div>
+          <h2>Resources</h2>
+          <p>Trusted, official Washington resources: WSHFC assistance programs, counseling, and credit tools.</p>
+        </a>
+        <a class="card card-cta" href="login.html">
+          <div class="card-ico">🔑</div>
+          <h2>Save your progress</h2>
+          <p>Create a free account to track your journey and goals, and pick up right where you left off.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- MEMBER VIEW (logged in) -->
+    <section class="section member-view" id="member-view">
+      <h1 class="visually-hidden">Your Dashboard</h1>
+      <div class="dash-head">
+        <div class="dash-id">
+          <span class="dash-avatar" id="dash-avatar"></span>
+          <div>
+            <h2 id="dash-greeting">Welcome back!</h2>
+            <span id="dash-streak" class="streak-chip hidden"></span>
+          </div>
+        </div>
+        <div class="dash-head-actions">
+          <a class="btn ghost" href="settings.html">Account settings</a>
+          <button class="btn ghost" id="dash-tour-btn" type="button">Replay tutorial</button>
+        </div>
+      </div>
+
+      <div class="dash-card" id="card-xp">
+        <div class="dash-level">
+          <span id="dash-level">Level 1</span>
+          <span class="dash-points" id="dash-points">0 pts</span>
+        </div>
+        <div class="dash-xpbar"><div id="dash-xpfill"></div></div>
+        <p class="sub" id="dash-xpnote" style="margin:8px 0 0"></p>
+      </div>
+
+      <a class="dash-next hidden" id="dash-next" href="#"></a>
+
+      <div class="dash-grid">
+        <div class="dash-card" id="card-journey"></div>
+        <div class="dash-card" id="card-savings"></div>
+      </div>
+
+      <div class="dash-card" style="text-align:left">
+        <h3>🏅 Your badges</h3>
+        <div id="dash-badges" class="badge-row"></div>
+      </div>
+
+      <div class="dash-card" style="text-align:left">
+        <h3>🚀 Jump back in</h3>
+        <div class="dash-links">
+          <a class="btn ghost" href="pages/address.html">🏠 Address Search</a>
+          <a class="btn ghost" href="pages/plan.html">Plan</a>
+          <a class="btn ghost" href="pages/journey.html">Journey</a>
+          <a class="btn ghost" href="pages/learn.html">Learn</a>
+          <a class="btn ghost" href="pages/resources.html">Resources</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/helpers.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

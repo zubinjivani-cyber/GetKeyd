@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="js/gate.js"></script>
+  <title>Account settings — getkeyd</title>
+
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://www.gstatic.com https://unpkg.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    img-src 'self' data: https:;
+    connect-src 'self' https://data.wa.gov https://geocoding.geo.census.gov https://api.census.gov https://nominatim.openstreetmap.org https://photon.komoot.io https://overpass-api.de https://api.weather.gov https://hazards.fema.gov https://gismaps.kingcounty.gov https://formspree.io https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com http://localhost:3001;
+    frame-src https://www.youtube-nocookie.com https://accounts.google.com;
+    media-src 'self';
+    base-uri 'self';
+    form-action 'self' https://formspree.io;
+    object-src 'none';
+  " />
+  <meta name="description" content="Manage your getkeyd account: profile picture, username, email, and password." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=5" />
+  <link rel="canonical" href="https://getkeyd.app/settings.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="getkeyd" />
+  <meta property="og:title" content="Account settings — getkeyd" />
+  <meta property="og:description" content="Manage your getkeyd account: profile picture, username, email, and password." />
+  <meta property="og:url" content="https://getkeyd.app/settings.html" />
+  <meta property="og:image" content="https://getkeyd.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Account settings — getkeyd" />
+  <meta name="twitter:description" content="Manage your getkeyd account: profile picture, username, email, and password." />
+  <meta name="twitter:image" content="https://getkeyd.app/assets/og-image.png" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="wrap" id="main">
+    <section class="section" id="settings">
+      <p class="sub" id="settings-loading">Loading your settings…</p>
+
+      <div id="settings-content" class="hidden">
+        <h1>Account settings</h1>
+        <p class="sub">Manage your profile and sign-in details.</p>
+
+        <!-- Profile picture -->
+        <div class="dash-card set-card">
+          <h2>Profile picture</h2>
+          <div class="set-avatar-row">
+            <span class="dash-avatar dash-avatar-lg" id="set-avatar-preview"></span>
+            <div class="set-avatar-choices">
+              <div id="set-avatar-grid" class="avatar-grid"></div>
+              <div class="set-avatar-upload">
+                <p class="sub" style="margin:0 0 8px">Or upload your own photo</p>
+                <input type="file" id="set-avatar-file" accept="image/*" class="visually-hidden" />
+                <label for="set-avatar-file" class="btn ghost upload-btn">📷 Choose a photo</label>
+                <span class="upload-hint" id="set-avatar-filename">JPG, PNG or GIF, up to 8&nbsp;MB.</span>
+              </div>
+            </div>
+          </div>
+          <div id="set-avatar-msg" class="set-msg hidden" role="status" aria-live="polite"></div>
+          <button class="btn primary" id="set-avatar-save">Save picture</button>
+        </div>
+
+        <!-- Username -->
+        <div class="dash-card set-card">
+          <h2>Username</h2>
+          <label>Display name
+            <input type="text" id="set-username" placeholder="Your name" autocomplete="nickname" />
+          </label>
+          <div id="set-username-msg" class="set-msg hidden" role="status" aria-live="polite"></div>
+          <button class="btn primary" id="set-username-save">Save username</button>
+        </div>
+
+        <!-- Role -->
+        <div class="dash-card set-card">
+          <h2>I am…</h2>
+          <div id="set-role-grid" class="role-grid role-grid-sm"></div>
+          <div id="set-role-msg" class="set-msg hidden" role="status" aria-live="polite"></div>
+        </div>
+
+        <!-- Email -->
+        <div class="dash-card set-card">
+          <h2>Email</h2>
+          <p class="sub" style="margin:0 0 12px">Current: <strong id="set-email-current">—</strong></p>
+          <div id="set-email-fields">
+            <label>New email
+              <input type="email" id="set-email-new" placeholder="new@email.com" autocomplete="email" />
+            </label>
+            <div id="set-email-msg" class="set-msg hidden" role="status" aria-live="polite"></div>
+            <button class="btn primary" id="set-email-save">Change email</button>
+          </div>
+          <p class="sub" id="set-email-managed" style="margin:0; display:none">Your email is managed by your Google account.</p>
+        </div>
+
+        <!-- Password -->
+        <div class="dash-card set-card" id="card-password">
+          <h2>Password</h2>
+          <label>New password
+            <input type="password" id="set-password-new" placeholder="At least 6 characters" minlength="6" autocomplete="new-password" />
+          </label>
+          <div id="set-password-msg" class="set-msg hidden" role="status" aria-live="polite"></div>
+          <button class="btn primary" id="set-password-save">Change password</button>
+        </div>
+
+        <div class="dash-card set-card">
+          <h2>Support</h2>
+          <p class="sub" style="margin:0 0 12px">Questions or issues? We're happy to help.</p>
+          <a class="btn ghost" href="pages/contact.html">Contact support</a>
+        </div>
+
+        <div class="dash-card set-card">
+          <h2>Session</h2>
+          <button class="btn ghost" id="set-signout">Log out</button>
+        </div>
+
+        <div class="dash-card set-card danger-card">
+          <h2>Delete account</h2>
+          <p class="sub" style="margin:0 0 12px">This permanently deletes your account and all your saved progress, goals, and data. This cannot be undone, and you'll be asked to confirm your identity first.</p>
+          <div id="set-delete-msg" class="set-msg hidden" role="alert"></div>
+          <button class="btn btn-danger" id="set-delete">Delete my account</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/helpers.js"></script>
+  <script src="js/settings-watchdog.js"></script>
+  <script src="js/layout.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

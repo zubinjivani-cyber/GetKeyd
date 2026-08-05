@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../js/gate.js"></script>
+  <title>Plan - getkeyd</title>
+
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://www.gstatic.com https://unpkg.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    img-src 'self' data: https:;
+    connect-src 'self' https://data.wa.gov https://geocoding.geo.census.gov https://api.census.gov https://nominatim.openstreetmap.org https://photon.komoot.io https://overpass-api.de https://api.weather.gov https://hazards.fema.gov https://gismaps.kingcounty.gov https://formspree.io https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com http://localhost:3001;
+    frame-src https://www.youtube-nocookie.com https://accounts.google.com;
+    media-src 'self';
+    base-uri 'self';
+    form-action 'self' https://formspree.io;
+    object-src 'none';
+  " />
+  <meta name="description" content="Check what you can afford, estimate your monthly mortgage payment, and track your down-payment savings goal." />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css?v=5" />
+  <link rel="canonical" href="https://getkeyd.app/pages/plan.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="getkeyd" />
+  <meta property="og:title" content="Plan - getkeyd" />
+  <meta property="og:description" content="Check what you can afford, estimate your monthly mortgage payment, and track your down-payment savings goal." />
+  <meta property="og:url" content="https://getkeyd.app/pages/plan.html" />
+  <meta property="og:image" content="https://getkeyd.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Plan - getkeyd" />
+  <meta name="twitter:description" content="Check what you can afford, estimate your monthly mortgage payment, and track your down-payment savings goal." />
+  <meta name="twitter:image" content="https://getkeyd.app/assets/og-image.png" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="wrap" id="main">
+    <section class="section">
+      <h1>Plan Your Numbers</h1>
+      <p class="sub">Three tools that work together: find out what you can afford, see what a specific home would cost each month, and track your down-payment goal.</p>
+
+      <h3 class="tool-title">📊 What Can I Afford?</h3>
+      <p class="sub">Start here - enter your finances to get an affordable price range and what to work on. Everything stays in your browser.</p>
+      <form id="assessment-form" class="panel">
+        <div class="grid">
+          <label>
+            Annual household income (before tax)
+            <input type="number" name="income" min="0" step="1000" placeholder="e.g. 85000" required />
+          </label>
+          <label>
+            Total monthly debt payments
+            <input type="number" name="debts" min="0" step="50" placeholder="e.g. 600" required />
+          </label>
+          <label>
+            Savings available for down payment + closing
+            <input type="number" name="savings" min="0" step="1000" placeholder="e.g. 40000" required />
+          </label>
+          <label>
+            Credit score range
+            <select name="credit" required>
+              <option value="">Select…</option>
+              <option value="excellent">Excellent (740+)</option>
+              <option value="good">Good (680–739)</option>
+              <option value="fair">Fair (620–679)</option>
+              <option value="poor">Building (below 620)</option>
+              <option value="unknown">Not sure</option>
+            </select>
+          </label>
+          <label>
+            Estimated mortgage interest rate (%)
+            <input type="number" name="rate" min="1" max="15" step="0.1" value="6.8" required />
+          </label>
+          <label>
+            Target region
+            <select name="region">
+              <option value="580000">Washington State (median ~$580K)</option>
+              <option value="420000">US national (median ~$420K)</option>
+            </select>
+          </label>
+        </div>
+        <button type="submit" class="btn primary">Calculate what I can afford</button>
+      </form>
+      <div id="assessment-result" class="result hidden"></div>
+
+      <h3 class="tool-title" style="margin-top:52px;">🏡 Monthly Payment Calculator</h3>
+      <p class="sub">Have a price in mind? See the full monthly cost broken down.</p>
+      <form id="calc-form" class="panel">
+        <div class="grid">
+          <label>
+            Home price
+            <input type="number" name="price" min="0" step="1000" value="580000" required />
+          </label>
+          <label>
+            Down payment (%)
+            <input type="number" name="down" min="0" max="100" step="1" value="10" required />
+          </label>
+          <label>
+            Interest rate (%)
+            <input type="number" name="rate" min="1" max="15" step="0.1" value="6.8" required />
+          </label>
+          <label>
+            Loan term
+            <select name="term">
+              <option value="30">30 years</option>
+              <option value="20">20 years</option>
+              <option value="15">15 years</option>
+            </select>
+          </label>
+          <label>
+            Property tax rate (% / year)
+            <span class="hint">WA averages ~0.9%.</span>
+            <input type="number" name="tax" min="0" max="5" step="0.05" value="0.9" required />
+          </label>
+          <label>
+            Home insurance ($ / year)
+            <input type="number" name="insurance" min="0" step="100" value="1500" required />
+          </label>
+        </div>
+        <button type="submit" class="btn primary">Calculate monthly payment</button>
+      </form>
+      <div id="calc-result" class="result hidden"></div>
+
+      <h3 class="tool-title" style="margin-top:52px;">🎯 Down Payment Savings Goal</h3>
+      <p class="sub">See how long until your down payment is ready - your goal saves automatically.</p>
+      <form id="savings-form" class="panel">
+        <div class="grid">
+          <label>
+            Target home price
+            <input type="number" name="price" min="0" step="1000" value="580000" required />
+          </label>
+          <label>
+            Goal: down payment + closing (% of price)
+            <input type="number" name="goalpct" min="1" max="100" step="0.5" value="13" required />
+          </label>
+          <label>
+            What you've saved so far
+            <input type="number" name="current" min="0" step="500" value="15000" required />
+          </label>
+          <label>
+            How much you can save each month
+            <input type="number" name="monthly" min="0" step="50" value="800" required />
+          </label>
+        </div>
+        <button type="submit" class="btn primary">Track my goal</button>
+      </form>
+      <div id="savings-result" class="result hidden"></div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="../js/helpers.js"></script>
+  <script src="../js/layout.js"></script>
+  <script src="../js/app.js"></script>
+  <script type="module" src="../js/auth.js"></script>
+</body>
+</html>

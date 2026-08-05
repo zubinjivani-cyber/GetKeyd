@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <rect width="48" height="48" rx="12" fill="#7ba591"/>
+  <!-- house -->
+  <path d="M24 8 L40 21 V38 Q40 40 38 40 H10 Q8 40 8 38 V21 Z" fill="#faf6f0"/>
+  <!-- keyhole -->
+  <circle cx="24" cy="24" r="4.2" fill="#7ba591"/>
+  <path d="M21.8 26.5 h4.4 l-1.1 7 h-2.2 Z" fill="#7ba591"/>
+</svg>

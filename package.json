@@ -1,0 +1,12 @@
+{
+  "name": "getkeyd",
+  "version": "1.0.0",
+  "description": "getkeyd — Washington homebuying, made simple",
+  "scripts": {
+    "dev": "python3 serve.py",
+    "proxy": "node proxy.js",
+    "start": "npm run proxy & npm run dev",
+    "refresh-pros": "python3 scripts/refresh-pros.py"
+  },
+  "private": true
+}
