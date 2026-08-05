@@ -27,9 +27,7 @@
   const licenseFilterSelect = document.getElementById('pros-license-filter');
   const websiteOnlyCheck = document.getElementById('pros-website-only');
   const resetBtn = document.getElementById('pros-reset');
-  const locateCard = document.getElementById('pros-locate');
-  const locateBtn = document.getElementById('pros-locate-btn');
-  const locateSkip = document.getElementById('pros-locate-skip');
+  const zipInput = document.getElementById('pros-zip');
 
   const SECTIONS = {
     'Handyman': { id: 'sec-handyman', list: 'list-handyman', heading: 'Handymen' },
@@ -37,12 +35,9 @@
     'Housing Counselor': { id: 'sec-counselor', list: 'list-counselor', heading: 'Housing Counselors' },
   };
 
-  let PROS = [], ZIPLOOKUP = {}, cat = 'All', query = '';
+  let PROS = [], ZIPLOOKUP = {}, cat = 'All', service = '', zip = '';
   let sortBy = 'name', licenseFilter = 'all', websiteOnly = false;
   let searchTimer = null;
-
-  // City index built from zip-lookup (city → county) so searches on either work.
-  let cityIndex = {}; // "seattle" → "King County"
 
   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -58,15 +53,6 @@
   ]).then(([data, zipLookup]) => {
     PROS = data.pros || [];
     ZIPLOOKUP = zipLookup;
-    Object.values(zipLookup).forEach(z => {
-      const key = z.city.toLowerCase();
-      if (!cityIndex[key]) cityIndex[key] = z.county;
-    });
-    // Also index cities that only appear in pros data (statewide L&I cities).
-    PROS.forEach(p => {
-      const key = p.city.toLowerCase();
-      if (!cityIndex[key] && p.county) cityIndex[key] = p.county;
-    });
 
     const categories = (data.categories || []).filter(c => SECTIONS[c]);
 
@@ -83,27 +69,47 @@
       render();
     });
 
-    /* ---- Debounced search (250ms, like the address page autocomplete) ---- */
+    /* ---- Debounced service search (250ms) ---- */
     search.addEventListener('input', () => {
       if (heroLoader) heroLoader.classList.remove('hidden');
       if (searchTimer) clearTimeout(searchTimer);
       searchTimer = setTimeout(() => {
-        query = search.value.trim();
+        service = search.value.trim().toLowerCase();
         render();
         if (heroLoader) heroLoader.classList.add('hidden');
         googleEnrich();
       }, 250);
     });
 
+    /* ---- Debounced ZIP search ---- */
+    if (zipInput) {
+      zipInput.addEventListener('input', () => {
+        if (searchTimer) clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => {
+          zip = zipInput.value.replace(/[^0-9]/g, '');
+          render();
+        }, 250);
+      });
+    }
+
     if (prosForm) {
-      prosForm.addEventListener('submit', e => e.preventDefault());
+      prosForm.addEventListener('submit', e => {
+        e.preventDefault();
+        service = search.value.trim().toLowerCase();
+        zip = (zipInput ? zipInput.value.replace(/[^0-9]/g, '') : '');
+        if (heroLoader) heroLoader.classList.remove('hidden');
+        setTimeout(() => { if (heroLoader) heroLoader.classList.add('hidden'); }, 400);
+        render();
+      });
     }
 
     /* ---- Toolbar ---- */
     if (copyLinkBtn) {
       copyLinkBtn.addEventListener('click', () => {
-        const url = location.origin + location.pathname +
-          (query ? '?q=' + encodeURIComponent(query) : '');
+        const params = [];
+        if (service) params.push('q=' + encodeURIComponent(service));
+        if (zip) params.push('z=' + encodeURIComponent(zip));
+        const url = location.origin + location.pathname + (params.length ? '?' + params.join('&') : '');
         const done = () => {
           const orig = copyLinkBtn.textContent;
           copyLinkBtn.textContent = 'Copied!';
@@ -150,8 +156,10 @@
         sortBy = 'name';
         licenseFilter = 'all';
         websiteOnly = false;
-        query = '';
+        service = '';
+        zip = '';
         search.value = '';
+        if (zipInput) zipInput.value = '';
         if (sortSelect) sortSelect.value = 'name';
         if (licenseFilterSelect) licenseFilterSelect.value = 'all';
         if (websiteOnlyCheck) websiteOnlyCheck.checked = false;
@@ -173,73 +181,17 @@
       heroSubtitle.classList.remove('hidden');
     }
 
-    /* ---- Location-first: geolocate + reverse-geocode via Photon ---- */
-    const hideLocate = () => { if (locateCard) locateCard.classList.add('hidden'); };
-    const failLocate = () => {
-      hideLocate();
-      if (heroSubtitle) {
-        heroSubtitle.textContent = "We couldn't get your location — search by city or ZIP above.";
-        heroSubtitle.classList.remove('hidden');
-      }
-      if (search) search.focus();
-    };
-
-    if (locateBtn) {
-      locateBtn.addEventListener('click', () => {
-        if (locateBtn.disabled) return;
-        locateBtn.disabled = true;
-        locateBtn.textContent = 'Locating…';
-        const onErr = () => failLocate();
-        if (!navigator.geolocation) { failLocate(); return; }
-        try {
-          navigator.geolocation.getCurrentPosition(pos => {
-            const lat = pos.coords.latitude, lng = pos.coords.longitude;
-            fetch('https://photon.komoot.io/reverse?lon=' + lng + '&lat=' + lat + '&limit=1')
-              .then(r => r.json())
-              .then(data => {
-                const props = (data.features && data.features[0] && data.features[0].properties) || {};
-                const city = (props.city || props.county || props.name || '').trim();
-                if (!city) { onErr(); return; }
-                try { localStorage.setItem('getkeyd.prosCity', city); } catch (err) {}
-                search.value = city;
-                query = city;
-                hideLocate();
-                if (heroSubtitle) {
-                  heroSubtitle.textContent = 'Showing pros near ' + city;
-                  heroSubtitle.classList.remove('hidden');
-                }
-                render();
-              })
-              .catch(onErr);
-          }, onErr, { timeout: 10000, maximumAge: 600000 });
-        } catch (err) {
-          failLocate();
-        }
-      });
-    }
-
-    if (locateSkip) {
-      locateSkip.addEventListener('click', () => {
-        hideLocate();
-        if (search) search.focus();
-      });
-    }
-
-    /* ---- Support ?q= URLs from copy-link ---- */
-    const urlQ = new URLSearchParams(location.search).get('q');
+    /* ---- Support ?q= (service) and ?z= (zip) URLs from copy-link ---- */
+    const urlParams = new URLSearchParams(location.search);
+    const urlQ = urlParams.get('q');
+    const urlZ = urlParams.get('z');
     if (urlQ) {
-      query = urlQ;
+      service = urlQ;
       search.value = urlQ;
-    } else {
-      /* ---- Location-first flow: prompt unless ?q= or a saved city exists ---- */
-      let savedCity = '';
-      try { savedCity = (localStorage.getItem('getkeyd.prosCity') || '').trim(); } catch (err) {}
-      if (savedCity) {
-        query = savedCity;
-        search.value = savedCity;
-      } else if (locateCard) {
-        locateCard.classList.remove('hidden');
-      }
+    }
+    if (urlZ) {
+      zip = urlZ;
+      if (zipInput) zipInput.value = urlZ;
     }
 
     if (loadingOverlay) loadingOverlay.classList.add('hidden');
@@ -254,18 +206,49 @@
     }
   });
 
-  function matchesQuery(p) {
-    if (!query) return true;
-    const q = query.toLowerCase();
-    const city = (p.city || '').toLowerCase();
-    const county = (p.county || '').toLowerCase();
-    const countyOfCity = (cityIndex[p.city.toLowerCase()] || '').toLowerCase();
-    if (p.city && city.includes(q)) return true;
-    if (p.county && county.includes(q)) return true;
-    if (countyOfCity && countyOfCity.includes(q)) return true;
-    if (p.zip && p.zip.startsWith(q)) return true;
-    if (p.name && p.name.toLowerCase().includes(q)) return true;
-    return false;
+  // Service keyword → category. L&I only licenses handymen as "HANDYMAN", so the
+  // match is to the license category, not a claim the pro does that specific work.
+  const TRADE_KEYS = [
+    ['home inspection', 'Home Inspector'], ['inspection', 'Home Inspector'], ['inspector', 'Home Inspector'],
+    ['counseling', 'Housing Counselor'], ['counsel', 'Housing Counselor'], ['counselor', 'Housing Counselor'],
+    ['housing', 'Housing Counselor'], ['mortgage', 'Housing Counselor'], ['credit', 'Housing Counselor'],
+    ['homebuyer', 'Housing Counselor'], ['down payment', 'Housing Counselor'], ['foreclosure', 'Housing Counselor'],
+    ['budget', 'Housing Counselor'], ['loan', 'Housing Counselor'],
+    ['plumb', 'Handyman'], ['pipe', 'Handyman'], ['leak', 'Handyman'], ['water heater', 'Handyman'],
+    ['electric', 'Handyman'], ['wiring', 'Handyman'], ['outlet', 'Handyman'], ['lighting', 'Handyman'],
+    ['paint', 'Handyman'], ['drywall', 'Handyman'], ['sheetrock', 'Handyman'], ['floor', 'Handyman'],
+    ['tile', 'Handyman'], ['kitchen', 'Handyman'], ['bathroom', 'Handyman'], ['remodel', 'Handyman'],
+    ['reno', 'Handyman'], ['roof', 'Handyman'], ['gutter', 'Handyman'], ['deck', 'Handyman'], ['fence', 'Handyman'],
+    ['door', 'Handyman'], ['window', 'Handyman'], ['lock', 'Handyman'], ['assembly', 'Handyman'],
+    ['furniture', 'Handyman'], ['install', 'Handyman'], ['mount', 'Handyman'], ['tv', 'Handyman'],
+    ['repair', 'Handyman'], ['fix', 'Handyman'], ['maintenance', 'Handyman'], ['contractor', 'Handyman'],
+    ['handyman', 'Handyman'], ['general', 'Handyman'],
+  ];
+
+  function serviceCategory(q) {
+    for (let i = 0; i < TRADE_KEYS.length; i++) {
+      if (q.includes(TRADE_KEYS[i][0])) return TRADE_KEYS[i][1];
+    }
+    return '';
+  }
+
+  function matchesService(p) {
+    if (!service) return true;
+    if (p.name && p.name.toLowerCase().includes(service)) return true;
+    const cat = serviceCategory(service);
+    return cat ? p.category === cat : false;
+  }
+
+  function matchesZip(p) {
+    if (!zip) return true;
+    const z = p.zip || '';
+    return z.startsWith(zip) || (zip.length >= 3 && z.startsWith(zip.slice(0, 3)));
+  }
+
+  // "98115" → "Seattle (98115)" when the zip is in the local lookup, else "ZIP 98115".
+  function zipLabel() {
+    const zl = ZIPLOOKUP[zip];
+    return zl ? zl.city + ' (' + zip + ')' : 'ZIP ' + zip;
   }
 
   // Category order for the "Category" sort = SECTIONS insertion order.
@@ -308,7 +291,7 @@
 
     visibleCats.forEach(c => {
       const sec = SECTIONS[c];
-      const list = sorted.filter(p => p.category === c && matchesQuery(p) && matchesFilters(p));
+      const list = sorted.filter(p => p.category === c && matchesService(p) && matchesZip(p) && matchesFilters(p));
       total += list.length;
 
       const sectionEl = document.getElementById(sec.id);
@@ -319,7 +302,8 @@
       if (list.length) {
         const heading = sectionEl.querySelector('.section-heading');
         if (heading) {
-          heading.textContent = sec.heading + (query ? ' in ' + query : '') + ' · ' + list.length;
+          const near = zip ? ' near ' + zipLabel() : '';
+          heading.textContent = sec.heading + near + ' · ' + list.length;
         }
         listEl.innerHTML = list.map(proCard).join('');
       } else {
@@ -332,16 +316,29 @@
     if (emptyEl) emptyEl.classList.toggle('hidden', hasResults);
 
     if (heroSubtitle) {
-      if (query || cat !== 'All' || filtered) {
+      if (service || zip || cat !== 'All' || filtered) {
+        const parts = [];
+        if (service) parts.push('"' + service + '"');
+        if (zip) parts.push('near ' + zipLabel());
+        if (cat !== 'All') parts.push(cat);
+        if (filtered) parts.push('filtered');
         heroSubtitle.textContent = total + ' of ' + PROS.length + ' pros match' +
-          (query ? ' "' + query + '"' : '') +
-          (cat !== 'All' ? ' · ' + cat : '') +
-          (filtered ? ' · filtered' : '');
+          (parts.length ? ' · ' + parts.join(' · ') : '');
       } else {
         heroSubtitle.textContent = PROS.length + ' licensed pros across Washington · updated ' +
           fmtDate(PROS[0] ? PROS[0].lastVerified : '');
       }
     }
+  }
+
+  // Deterministic colored initial avatar (the site's auth avatars use the same
+  // idea; L&I/HUD don't provide photos, so a stable monogram stands in).
+  function avatarFor(name) {
+    let h = 0;
+    const n = String(name || '?');
+    for (let i = 0; i < n.length; i++) h = (h * 31 + n.charCodeAt(i)) % 360;
+    return '<span class="pro-avatar" style="background:hsl(' + h + ',42%,52%)" aria-hidden="true">' +
+      escapeHtml((n.charAt(0) || '?').toUpperCase()) + '</span>';
   }
 
   function proCard(p) {
@@ -367,7 +364,8 @@
     }
     return '<div class="stat-pair pro-card">' +
         '<div class="stat">' +
-          '<div class="num">' + escapeHtml(p.name) + '</div>' +
+          '<div class="num pro-name-row">' + avatarFor(p.name) +
+            '<span>' + escapeHtml(p.name) + '</span></div>' +
           '<div class="lbl">' + escapeHtml(p.category) + ' · ' + escapeHtml(where) + '</div>' +
         '</div>' +
         '<div class="stat">' +
@@ -416,8 +414,8 @@
   }
 
   function googleEnrich() {
-    if (!googleCfg.enabled || !googleCfg.endpoint || !query) return;
-    fetch(googleCfg.endpoint + '?q=' + encodeURIComponent(query + ' home services'), { signal: AbortSignal.timeout(12000) })
+    if (!googleCfg.enabled || !googleCfg.endpoint || !service) return;
+    fetch(googleCfg.endpoint + '?q=' + encodeURIComponent(service + ' home services'), { signal: AbortSignal.timeout(12000) })
       .then(r => { if (!r.ok) throw new Error('google ' + r.status); return r.json(); })
       .then(data => {
         const results = (data && data.results) || [];

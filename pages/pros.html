@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/styles.css?v=5" />
+  <link rel="stylesheet" href="../css/styles.css?v=7" />
   <link rel="canonical" href="https://getkeyd.app/pages/pros.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="getkeyd" />
@@ -51,19 +51,11 @@
       <h1 class="hero-title">Find a Local Pro</h1>
       <p class="hero-subtitle hidden" id="hero-subtitle"></p>
 
-      <div id="pros-locate" class="pros-locate hidden">
-        <p class="pros-locate-title">Find licensed pros near you</p>
-        <p class="pros-locate-sub">We'll use your city to show nearby handymen and counselors. You can still search manually.</p>
-        <div class="pros-locate-actions">
-          <button type="button" class="btn primary" id="pros-locate-btn">📍 Use my location</button>
-          <button type="button" class="btn ghost" id="pros-locate-skip">I'll type a city</button>
-        </div>
-      </div>
-
       <form id="pros-form" class="hero-form" role="search">
-        <div class="hero-input-group">
+        <div class="hero-input-group pros-inputs">
           <svg class="hero-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="pros-search" class="hero-input" placeholder="Search by city, town, or ZIP — e.g. Seattle, 98225" autocomplete="off" aria-label="Search local pros" />
+          <input type="text" id="pros-search" class="hero-input" placeholder="What do you need? e.g. plumbing, painting, counseling" autocomplete="off" aria-label="Search for a service" />
+          <input type="text" id="pros-zip" class="hero-input pros-zip-input" placeholder="ZIP code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" aria-label="ZIP code" />
           <button type="submit" class="hero-btn">
             <span id="pros-submit-text">Find Pros</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -136,7 +128,7 @@
         </div>
 
         <div id="pros-empty" class="hidden">
-          <p class="sub">No listings in this area yet. Try a nearby city, or <a href="contact.html">suggest a pro</a>.</p>
+          <p class="sub">No Washington-licensed pros found in this area yet. This directory covers Washington State — try a WA city like Seattle, Spokane, or Tacoma, or <a href="contact.html">suggest a pro</a>.</p>
         </div>
 
         <!-- Section: Handymen -->
@@ -180,7 +172,7 @@
 
   <script src="../js/helpers.js"></script>
   <script src="../js/layout.js"></script>
-  <script src="../js/pros.js"></script>
+  <script src="../js/pros.js?v=7"></script>
   <script type="module" src="../js/auth.js"></script>
 </body>
 </html>

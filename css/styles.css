@@ -2549,8 +2549,10 @@ body.intro-lock { overflow: hidden; }
 }
 
 /* ── Hero Section ── */
+/* z-index 20: above the loading overlay (15), below the nav drawer (30) so the
+   drawer stays clickable when it slides over the hero. */
 .hero {
-  position: relative; overflow: clip; overflow-clip-margin: 260px; z-index: 30;
+  position: relative; overflow: clip; overflow-clip-margin: 260px; z-index: 20;
   padding: 80px 0 90px; text-align: center;
   background: linear-gradient(180deg, var(--sage-soft) 0%, var(--bg) 100%);
 }
@@ -3624,43 +3626,20 @@ body.no-scroll { overflow: hidden; }
 .status-row .mark.bad { color: #ef4444; font-weight: 700; }
 .status-row .mark.na  { color: #9ca3af; }
 
-/* ── Location-first locate card (pros page hero) ── */
-.pros-locate {
-  max-width: 520px;
-  margin: 0 auto 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 22px 26px;
-  box-shadow: var(--shadow-soft);
+
+/* ── Pros: avatar monograms + two-input search ── */
+.pro-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 1.05rem;
+  flex-shrink: 0; user-select: none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08);
 }
-.pros-locate.hidden { display: none; }
-.pros-locate-title {
-  margin: 0;
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--text);
-}
-.pros-locate-sub {
-  margin: 0;
-  font-size: 0.92rem;
-  color: var(--muted);
-}
-.pros-locate-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 10px;
-}
-.pros-locate .btn { padding: 11px 22px; }
-.pros-locate #pros-locate-btn:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
+.pro-name-row { display: flex; align-items: center; gap: 12px; }
+.pro-name-row span { min-width: 0; }
+.pros-inputs { display: flex; gap: 10px; }
+.pros-zip-input { max-width: 130px; flex-shrink: 0; }
+@media (max-width: 620px) {
+  .pros-inputs { flex-wrap: wrap; }
+  .pros-zip-input { max-width: 100%; }
 }
