@@ -10,23 +10,37 @@
   var root = inPages ? "../" : "";      // path back to the site root (index.html)
   var pg = inPages ? "" : "pages/";     // path into the /pages/ folder
 
-  // [label, href] - add a line here to add a page to the menu everywhere.
+  // [label, href, svg] - add a line here to add a page to the menu everywhere.
+  // svg is the icon markup (1-2 stroke paths, 24x24 viewBox) injected left of the label.
   var NAV = [
-    ["Home", root + "index.html"],
-    ["Address Search", pg + "address.html"],
-    ["Local Pros", pg + "pros.html"],
-    ["Plan", pg + "plan.html"],
-    ["Journey", pg + "journey.html"],
-    ["Learn", pg + "learn.html"],
-    ["Resources", pg + "resources.html"],
-    ["Contact", pg + "contact.html"],
+    ["Home", root + "index.html",
+      '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>'],
+    ["Address Search", pg + "address.html",
+      '<path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>'],
+    ["Local Pros", pg + "pros.html",
+      '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'],
+    ["Plan", pg + "plan.html",
+      '<rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="12" x2="8" y2="16"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="16" y1="12" x2="16" y2="16"/>'],
+    ["Journey", pg + "journey.html",
+      '<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6"/>'],
+    ["Learn", pg + "learn.html",
+      '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/>'],
+    ["Resources", pg + "resources.html",
+      '<path d="M3 7a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>'],
+    ["Contact", pg + "contact.html",
+      '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>'],
   ];
 
   var current = location.pathname.split("/").pop() || "index.html";
   var links = NAV.map(function (item) {
     var file = item[1].split("/").pop();
     var active = file === current ? " active" : "";
-    return '<a href="' + item[1] + '" class="nav-btn' + active + '">' + item[0] + "</a>";
+    return (
+      '<a href="' + item[1] + '" class="nav-btn' + active + '">' +
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+      'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      item[2] + "</svg><span>" + item[0] + "</span></a>"
+    );
   }).join("");
 
   var header =

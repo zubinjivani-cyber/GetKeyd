@@ -44,7 +44,7 @@ async function sendVerification(user) {
 const base = location.pathname.includes("/pages/") ? "../" : "";
 
 // Pages anyone can view logged out. Everything else requires a verified account.
-const PUBLIC_PAGES = ["index.html", "login.html", "privacy.html", "terms.html", "404.html"];
+const PUBLIC_PAGES = ["index.html", "pros.html", "login.html", "privacy.html", "terms.html", "404.html"];
 const currentFile = (location.pathname.split("/").pop() || "index.html").toLowerCase();
 const isPublicPage = PUBLIC_PAGES.includes(currentFile);
 
@@ -432,104 +432,160 @@ function confetti() {
   };
   tick();
 }
-function celebrate(message) {
-  toast(message);
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) confetti();
-}
 
 function renderDashboard(user) {
-  const j = journeyStats(user.uid);
-  const s = savingsStats(user.uid);
-
-  let points = j.done * 10;
-  if (s) points += 20;
-  if (j.pct >= 100) points += 50;
-  const level = Math.floor(points / 50) + 1;
-  const intoLevel = points % 50;
+  const uid = user.uid;
 
   document.getElementById("dash-greeting").textContent = `Welcome back, ${firstName(user)}! 👋`;
   const avEl = document.getElementById("dash-avatar");
   if (avEl) avEl.innerHTML = avatarMarkup(user);
-  document.getElementById("dash-level").textContent = `Level ${level}`;
-  document.getElementById("dash-points").textContent = `${points} pts`;
-  document.getElementById("dash-xpfill").style.width = (intoLevel / 50) * 100 + "%";
-  document.getElementById("dash-xpnote").textContent = `${50 - intoLevel} pts to Level ${level + 1}`;
 
-  document.getElementById("card-journey").innerHTML =
-    `<h3>🗺️ Your Journey</h3>${ringSVG(j.pct, "var(--sage)")}
-     <p class="sub">${j.done} of ${j.total} steps complete</p>
-     <a class="btn primary" href="${base}pages/journey.html">Continue journey</a>`;
+  fillRole(uid);
+  fillNextAction(uid);
+  fillProgress(uid);
+  initHowto(uid);
+}
 
-  document.getElementById("card-savings").innerHTML = s
-    ? `<h3>🎯 Savings Goal</h3>${ringSVG(s.pct, "var(--clay)")}
-       <p class="sub">${money(s.current)} of ${money(s.goal)} saved</p>
-       <a class="btn ghost" href="${base}pages/plan.html">Update goal</a>`
-    : `<h3>🎯 Savings Goal</h3><p class="sub" style="margin:28px 0">No down-payment goal set yet.</p>
-       <a class="btn primary" href="${base}pages/plan.html">Set your goal</a>`;
+/* ---------- Dashboard fills (utility, not gamified) ---------- */
 
-  const badges = [
-    ["🌱", "First Step", j.done >= 1],
-    ["🧭", "Getting Going", j.done >= 5],
-    ["🏡", "Halfway Home", j.pct >= 50],
-    ["🔑", "Homeowner", j.pct >= 100],
-    ["💰", "Goal Setter", !!s],
-    ["📈", "On Track", !!s && s.pct >= 50],
-  ];
-  document.getElementById("dash-badges").innerHTML = badges
-    .map(([ic, label, earned]) =>
-      `<div class="badge-item ${earned ? "earned" : "locked"}"><span class="badge-ic">${ic}</span><span>${label}</span></div>`)
-    .join("");
-
-  // Daily streak
-  const d = new Date();
-  const today = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
-  const lastKey = progPrefix(user.uid) + "lastVisit";
-  const streakKey = progPrefix(user.uid) + "streak";
-  let streak = parseInt(localStorage.getItem(streakKey) || "0", 10);
-  const last = localStorage.getItem(lastKey);
-  if (last !== today) {
-    const yd = new Date(); yd.setDate(yd.getDate() - 1);
-    const yday = yd.getFullYear() + "-" + String(yd.getMonth() + 1).padStart(2, "0") + "-" + String(yd.getDate()).padStart(2, "0");
-    streak = last === yday ? streak + 1 : 1;
-    localStorage.setItem(streakKey, String(streak));
-    localStorage.setItem(lastKey, today);
+// First JOURNEY step (data.js) not yet checked off for this account.
+function firstIncompleteStep(uid) {
+  for (let pi = 0; pi < JOURNEY.length; pi++) {
+    const ph = JOURNEY[pi];
+    for (let si = 0; si < ph.steps.length; si++) {
+      if (localStorage.getItem(progPrefix(uid) + "step." + pi + "." + si) !== "1") return ph.steps[si];
+    }
   }
-  const streakEl = document.getElementById("dash-streak");
-  if (streakEl) { streakEl.textContent = `🔥 ${streak}-day streak`; streakEl.classList.remove("hidden"); }
+  return null;
+}
 
-  // Next best action
-  const nextEl = document.getElementById("dash-next");
-  if (nextEl) {
-    let na;
-    if (!s) na = ["🎯 Set your down-payment goal", "See how long until you're ready to buy.", base + "pages/plan.html"];
-    else if (j.done === 0) na = ["🧭 Start your journey", "Check your credit score, that's step one.", base + "pages/journey.html"];
-    else if (j.pct < 100) na = [`🗺️ Continue your journey (${j.pct}% done)`, "Pick up right where you left off.", base + "pages/journey.html"];
-    else na = ["🎉 You've finished the journey!", "Explore trusted resources next.", base + "pages/resources.html"];
-    nextEl.href = na[2];
-    nextEl.innerHTML = `<span class="next-label">Your next step</span><strong>${na[0]}</strong><span class="next-sub">${na[1]}</span>`;
-    nextEl.classList.remove("hidden");
+function fillRole(uid) {
+  const el = document.getElementById("dash-role");
+  if (!el) return;
+  let role = "";
+  try { role = localStorage.getItem(roleKey(uid)) || ""; } catch (_) {}
+  el.textContent = role || "getkeyd member";
+}
+
+// Single "next best action" card, decided by the user's real state.
+function fillNextAction(uid) {
+  const el = document.getElementById("dash-next");
+  if (!el) return;
+  const j = journeyStats(uid);
+  const s = savingsStats(uid);
+
+  let title, sub, cta, href, cta2 = "", href2 = "";
+  if (!s) {
+    title = "Set your savings goal";
+    sub = "Tell us your target home price — we'll show your monthly target and estimated ready date.";
+    cta = "Set a goal"; href = base + "pages/plan.html";
+  } else if (j.done === 0) {
+    title = "Start the buying journey";
+    sub = "Step one: check your credit score. It's free, and it shapes everything after it.";
+    cta = "Start step one"; href = base + "pages/journey.html";
+  } else if (j.pct < 100) {
+    const next = firstIncompleteStep(uid);
+    title = "Continue your journey";
+    sub = next ? `Next up: "${next[0]}"` : "Pick up right where you left off.";
+    cta = "Continue"; href = base + "pages/journey.html";
+  } else if (s.pct < 100) {
+    title = "Keep saving toward your goal";
+    sub = `You've saved ${s.pct}% — ${money(s.current)} of ${money(s.goal)}.`;
+    cta = "View your plan"; href = base + "pages/plan.html";
+  } else {
+    title = "Find your home";
+    sub = "You're financially ready. Start looking: search addresses, then find a buyer's agent.";
+    cta = "Search for a home"; href = base + "pages/address.html";
+    cta2 = "Talk to a housing counselor"; href2 = "https://www.hud.gov/i_want_to/talk_to_a_housing_counselor";
   }
 
-  // Celebrations on level-up / new badge (baseline set silently on first load)
-  const earnedCount = badges.filter((b) => b[2]).length;
-  const lvlKey = progPrefix(user.uid) + "seenLevel";
-  const bdgKey = progPrefix(user.uid) + "seenBadges";
-  const hadLvl = localStorage.getItem(lvlKey) !== null;
-  const hadBdg = localStorage.getItem(bdgKey) !== null;
-  if (hadLvl && level > parseInt(localStorage.getItem(lvlKey), 10)) celebrate(`Level up! You're Level ${level} 🎉`);
-  else if (hadBdg && earnedCount > parseInt(localStorage.getItem(bdgKey), 10)) celebrate("New badge unlocked! 🏅");
-  localStorage.setItem(lvlKey, String(level));
-  localStorage.setItem(bdgKey, String(earnedCount));
+  const eye = el.querySelector(".dash-next-eyebrow");
+  if (eye) eye.textContent = "What to do next";
+  const titleEl = el.querySelector("#dash-next-title");
+  if (titleEl) titleEl.textContent = title;
+  const subEl = el.querySelector("#dash-next-sub");
+  if (subEl) subEl.textContent = sub;
+  const ctaEl = el.querySelector("#dash-next-cta");
+  if (ctaEl) { ctaEl.textContent = cta; ctaEl.href = href; }
+  const cta2El = el.querySelector("#dash-next-cta2");
+  if (cta2El) { cta2El.textContent = cta2; cta2El.href = href2; cta2El.classList.toggle("hidden", !cta2); }
+  el.classList.remove("hidden");
+}
+
+// Thin progress bar: container in HTML, width applied to its fill child (<i>),
+// matching the .bar markup used on the Learn page.
+function setBar(barEl, pct) {
+  const fill = barEl ? barEl.firstElementChild : null;
+  if (fill) fill.style.width = pct + "%";
+}
+
+// Count "1"-flagged keys under a storage prefix (steps, guides, terms).
+function countFlagged(prefix) {
+  let n = 0;
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k && k.startsWith(prefix) && localStorage.getItem(k) === "1") n++;
+  }
+  return n;
+}
+
+function fillProgress(uid) {
+  const j = journeyStats(uid);
+  const jLine = document.getElementById("dash-journey-line");
+  if (jLine) jLine.textContent = `${j.done} of ${j.total} steps`;
+  setBar(document.getElementById("dash-journey-bar"), j.pct);
+
+  const s = savingsStats(uid);
+  const ring = document.getElementById("dash-savings-ring");
+  const sLine = document.getElementById("dash-savings-line");
+  const sEmpty = document.getElementById("dash-savings-empty");
+  if (s) {
+    if (ring) ring.innerHTML = ringSVG(s.pct, "var(--clay)");
+    if (sLine) sLine.textContent = `${money(s.current)} of ${money(s.goal)} saved`;
+    if (ring) ring.classList.remove("hidden");
+    if (sLine) sLine.classList.remove("hidden");
+    if (sEmpty) sEmpty.classList.add("hidden");
+  } else {
+    if (ring) ring.classList.add("hidden");
+    if (sLine) sLine.classList.add("hidden");
+    if (sEmpty) sEmpty.classList.remove("hidden");
+  }
+
+  const guidesDone = countFlagged(progPrefix(uid) + "guide.");
+  const termsDone = countFlagged(progPrefix(uid) + "learned.");
+  const gLine = document.getElementById("dash-guides-line");
+  if (gLine) gLine.textContent = `${guidesDone} of ${GUIDES.length} guides read`;
+  setBar(document.getElementById("dash-guides-bar"), GUIDES.length ? Math.round((guidesDone / GUIDES.length) * 100) : 0);
+  const tLine = document.getElementById("dash-terms-line");
+  if (tLine) tLine.textContent = `${termsDone} of ${GLOSSARY.length} terms learned`;
+  setBar(document.getElementById("dash-terms-bar"), GLOSSARY.length ? Math.round((termsDone / GLOSSARY.length) * 100) : 0);
+}
+
+// One-time how-to strip: shown until dismissed, dismissable for good.
+function initHowto(uid) {
+  const strip = document.getElementById("dash-howto");
+  if (!strip) return;
+  const key = "getkeyd.howto." + uid;
+  const close = document.getElementById("dash-howto-close");
+  if (close) close.addEventListener("click", () => {
+    try { localStorage.setItem(key, "done"); } catch (_) {}
+    strip.classList.add("hidden");
+  });
+  const replay = document.getElementById("dash-howto-replay");
+  if (replay) replay.addEventListener("click", (e) => { e.preventDefault(); strip.classList.remove("hidden"); });
+  let done = false;
+  try { done = !!localStorage.getItem(key); } catch (_) {}
+  if (!done) strip.classList.remove("hidden");
 }
 
 /* ---------- Guided tour (new users) ---------- */
 function startTour(user) {
   const steps = [
     { title: `Welcome, ${escapeHtml(firstName(user))}!`, body: "Here's a quick tour of your dashboard. It takes about 20 seconds." },
-    { title: "Your level & points", body: "Earn points as you complete steps and hit goals, and level up as you go.", target: "#card-xp" },
-    { title: "Journey progress", body: "Track every step from prep to closing. Each one you check off adds points.", target: "#card-journey" },
-    { title: "Savings goal", body: "Set a down-payment goal and watch your progress and your projected ready-date.", target: "#card-savings" },
-    { title: "Badges", body: "Unlock badges as you hit milestones on the way to owning your home.", target: "#dash-badges" },
+    { title: "Quick actions", body: "Jump straight to Address Search, Pros, Plan, Journey, or Learn from the tiles.", target: "#dash-quick" },
+    { title: "Your next step", body: "The card at the top tells you what to do next — it updates as you make progress.", target: "#dash-next" },
+    { title: "Savings goal", body: "Set a down-payment goal and watch your progress toward your projected ready-date.", target: "#card-savings" },
+    { title: "Progress", body: "Track your journey, savings goal, and learning — all in one place.", target: "#dash-progress" },
     { title: "Explore anytime", body: "Use the menu (top left) to reach Plan, Journey, Learn, and Resources.", target: "#nav-toggle" },
   ];
   let i = 0;
@@ -623,6 +679,27 @@ if (document.getElementById("settings")) {
     }
     document.getElementById("settings-loading").classList.add("hidden");
     document.getElementById("settings-content").classList.remove("hidden");
+
+    // Profile hero: name, role, and useful account facts.
+    try {
+      const nameEl = document.getElementById("profile-name");
+      const roleEl = document.getElementById("profile-role");
+      const joinedEl = document.getElementById("profile-joined");
+      const progressEl = document.getElementById("profile-progress");
+      if (nameEl) nameEl.textContent = user.displayName || user.email || "Member";
+      if (roleEl) {
+        const role = localStorage.getItem(roleKey(user.uid)) || "";
+        roleEl.textContent = role ? role + " · getkeyd member" : "getkeyd member";
+      }
+      if (joinedEl) {
+        const created = user.metadata && user.metadata.creationTime ? new Date(user.metadata.creationTime) : null;
+        joinedEl.textContent = "Member since " + (created && !isNaN(created) ? created.toLocaleDateString("en-US", { month: "long", year: "numeric" }) : "");
+      }
+      if (progressEl) {
+        const j = journeyStats(user.uid);
+        progressEl.textContent = "Journey: " + j.done + " of " + j.total + " steps";
+      }
+    } catch (_) { /* profile hero is decorative — never block settings */ }
 
     const hasPw = user.providerData.some((p) => p.providerId === "password");
     const setMsg = (id, text, ok) => {

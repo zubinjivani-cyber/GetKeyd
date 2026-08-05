@@ -95,27 +95,12 @@ def main():
         pass
     curated = [p for p in existing if p["id"].startswith("cur-")]
 
+    # Handyman listings are curated demo entries (data/pros.json "cur-hm-*") —
+    # the bulk L&I pull was removed because it carried no websites/rates.
     pros = curated
-    for r in fetch_lni_handymen():
-        if not r.get("businessname") or not r.get("city"):
-            continue
-        lic = (r.get("contractorlicensenumber") or "").strip()
-        zip5 = (r.get("zip") or "").split("-")[0].strip()
-        zl = zips.get(zip5, {})
-        pros.append({
-            "id": "lni-" + lic,
-            "name": re.sub(r"\s+", " ", r["businessname"]).strip(),
-            "category": "Handyman",
-            "city": r["city"].strip().title(),
-            "county": zl.get("county", ""),
-            "zip": zip5,
-            "phone": (r.get("phonenumber") or "").strip(),
-            "website": "",
-            "email": "",
-            "license": lic,
-            "source": "wa-lni",
-            "lastVerified": TODAY,
-        })
+    # (L&I handyman registry pull disabled: fetch_lni_handymen kept for reference
+    #  only; re-enable by appending rows with source "wa-lni" when the directory
+    #  moves past curated entries.)
 
     for r in fetch_hud_counselors():
         slug = re.sub(r"[^a-z0-9]+", "-", r["businessname"].lower()).strip("-")

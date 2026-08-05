@@ -248,7 +248,7 @@
   function buildDropdownMenu() {
     var html = '';
     ALL_COLUMNS.forEach(function (c) {
-      html += '<label class="column-dropdown-item">' +
+      html += '<label class="column-dropdown-item" style="flex-direction:row;">' +
         '<input type="checkbox" ' + (visibleColumns[c.id] ? 'checked' : '') + ' data-col="' + c.id + '">' +
         '<span>' + escapeHtml(c.label) + '</span></label>';
     });

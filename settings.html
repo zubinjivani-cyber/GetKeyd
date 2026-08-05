@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=7" />
+  <link rel="stylesheet" href="css/styles.css?v=10" />
   <link rel="canonical" href="https://getkeyd.app/settings.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="getkeyd" />
@@ -45,36 +45,43 @@
       <p class="sub" id="settings-loading">Loading your settings…</p>
 
       <div id="settings-content" class="hidden">
-        <h1>Account settings</h1>
-        <p class="sub">Manage your profile and sign-in details.</p>
+        <h1>Your profile</h1>
+        <p class="sub">Manage your profile, progress, and sign-in details.</p>
 
-        <!-- Profile picture -->
-        <div class="dash-card set-card">
-          <h2>Profile picture</h2>
-          <div class="set-avatar-row">
-            <span class="dash-avatar dash-avatar-lg" id="set-avatar-preview"></span>
-            <div class="set-avatar-choices">
-              <div id="set-avatar-grid" class="avatar-grid"></div>
-              <div class="set-avatar-upload">
-                <p class="sub" style="margin:0 0 8px">Or upload your own photo</p>
-                <input type="file" id="set-avatar-file" accept="image/*" class="visually-hidden" />
-                <label for="set-avatar-file" class="btn ghost upload-btn">📷 Choose a photo</label>
-                <span class="upload-hint" id="set-avatar-filename">JPG, PNG or GIF, up to 8&nbsp;MB.</span>
-              </div>
-            </div>
+        <!-- Profile hero -->
+        <div class="profile-hero">
+          <span class="dash-avatar dash-avatar-lg set-avatar-ring" id="set-avatar-preview"></span>
+          <div class="profile-id">
+            <h2 id="profile-name">—</h2>
+            <p id="profile-role">—</p>
+            <p class="sub" style="margin:0 0 4px" id="profile-joined">—</p>
+            <p class="sub" style="margin:0" id="profile-progress">—</p>
           </div>
-          <div id="set-avatar-msg" class="set-msg hidden" role="status" aria-live="polite"></div>
-          <button class="btn primary" id="set-avatar-save">Save picture</button>
         </div>
 
-        <!-- Username -->
-        <div class="dash-card set-card">
-          <h2>Username</h2>
-          <label>Display name
-            <input type="text" id="set-username" placeholder="Your name" autocomplete="nickname" />
-          </label>
-          <div id="set-username-msg" class="set-msg hidden" role="status" aria-live="polite"></div>
-          <button class="btn primary" id="set-username-save">Save username</button>
+        <!-- Profile picture + Username (2-col on desktop) -->
+        <div class="set-grid">
+          <div class="dash-card set-card">
+            <h2>Profile picture</h2>
+            <div id="set-avatar-grid" class="avatar-grid"></div>
+            <div class="set-avatar-upload">
+              <p class="sub" style="margin:0 0 8px">Or upload your own photo</p>
+              <input type="file" id="set-avatar-file" accept="image/*" class="visually-hidden" />
+              <label for="set-avatar-file" class="btn ghost upload-btn">📷 Choose a photo</label>
+              <span class="upload-hint" id="set-avatar-filename">JPG, PNG or GIF, up to 8&nbsp;MB.</span>
+            </div>
+            <div id="set-avatar-msg" class="set-msg hidden" role="status" aria-live="polite"></div>
+            <button class="btn primary" id="set-avatar-save">Save picture</button>
+          </div>
+
+          <div class="dash-card set-card">
+            <h2>Username</h2>
+            <label>Display name
+              <input type="text" id="set-username" placeholder="Your name" autocomplete="nickname" />
+            </label>
+            <div id="set-username-msg" class="set-msg hidden" role="status" aria-live="polite"></div>
+            <button class="btn primary" id="set-username-save">Save username</button>
+          </div>
         </div>
 
         <!-- Role -->
@@ -133,7 +140,7 @@
 
   <script src="js/helpers.js"></script>
   <script src="js/settings-watchdog.js"></script>
-  <script src="js/layout.js"></script>
+  <script src="js/layout.js?v=10"></script>
   <script type="module" src="js/auth.js"></script>
 </body>
 </html>
